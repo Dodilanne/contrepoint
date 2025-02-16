@@ -11,26 +11,26 @@ npm i contrepoint
 ## Basic Usage
 
 ```typescript
-import { createRunner } from 'contrepoint';
+import { createRunner } from "contrepoint";
 
 // Create a runner
 const runner = createRunner()
   .register({
-    name: 'first',
-    run: async () => 'Hello'
+    name: "first",
+    run: async () => "Hello",
   })
   .register({
-    name: 'second',
+    name: "second",
     run: async ({ outputs }) => {
       // Access results from other tasks
       const firstResult = await outputs.first;
       return `${firstResult} World`;
-    }
+    },
   });
 
 // Run with error handling (Promise.allSettled)
 const results = await runner.run();
-// { 
+// {
 //   first: { status: 'fulfilled', value: 'Hello' },
 //   second: { status: 'fulfilled', value: 'Hello World' }
 // }
@@ -40,13 +40,12 @@ const allResults = await runner.all();
 // { first: 'Hello', second: 'Hello World' }
 
 // You can also pass input to all tasks
-const runnerWithInput = createRunner<string>()
-  .register({
-    name: 'task',
-    run: async ({ input }) => `Got input: ${input}`
-  });
+const runnerWithInput = createRunner<string>().register({
+  name: "task",
+  run: async ({ input }) => `Got input: ${input}`,
+});
 
-await runnerWithInput.run('my input');
+await runnerWithInput.run("my input");
 ```
 
 ## Standalone Tasks
