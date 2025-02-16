@@ -1,0 +1,89 @@
+{
+	"name": "contrepoint",
+	"description": "Simple utility for orchestrating interdependent concurrent tasks in TypeScript",
+	"version": "0.0.1",
+	"author": "Dodilanne",
+	"bugs": {
+		"url": "https://github.com/dodilanne/contrepoint/issues"
+	},
+	"homepage": "https://github.com/dodilanne/contrepoint",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dodilanne/contrepoint.git"
+	},
+	"keywords": [
+		"javascript",
+		"typescript",
+		"typesafe",
+		"concurrent",
+		"task-runner",
+		"dependencies",
+		"parallel",
+		"orchestration",
+		"tasks",
+		"task",
+		"runner"
+	],
+	"license": "MIT",
+	"sideEffects": false,
+	"files": ["**"],
+	"main": "./index.js",
+	"module": "./index.mjs",
+	"types": "./index.d.mts",
+	"scripts": {
+		"build": "tsup",
+		"check": "tsc --noEmit",
+		"lint": "biome check --write .",
+		"test": "vitest --run",
+		"test:watch": "vitest"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"require": {
+				"types": "./index.d.ts",
+				"require": "./index.js"
+			},
+			"import": {
+				"types": "./index.d.mts",
+				"import": "./index.mjs"
+			}
+		},
+		"./runner": {
+			"require": {
+				"types": "./runner.d.ts",
+				"require": "./runner.js"
+			},
+			"import": {
+				"types": "./runner.d.mts",
+				"import": "./runner.mjs"
+			}
+		},
+		"./task": {
+			"require": {
+				"types": "./task.d.ts",
+				"require": "./task.js"
+			},
+			"import": {
+				"types": "./task.d.mts",
+				"import": "./task.mjs"
+			}
+		},
+		"./types": {
+			"require": {
+				"types": "./types.d.ts",
+				"require": "./types.js"
+			},
+			"import": {
+				"types": "./types.d.mts",
+				"import": "./types.mjs"
+			}
+		}
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"tsup": "^8.3.6",
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.5"
+	}
+}
