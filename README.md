@@ -54,17 +54,20 @@ await runnerWithInput.run('my input');
 ```typescript
 import { createTask, createRunner } from "contrepoint";
 
-const first = createTask("first", async () => "Hello");
+const first = createTask({
+  name: "first",
+  run: async () => "Hello",
+});
 
-const second = createTask(
-  "second",
+const second = createTask({
+  name: "second",
   // Declare dependencies by typing the context
-  async (ctx: Context<void, [typeof first]>) => {
+  run: async (ctx: Context<void, [typeof first]>) => {
     // Full type safety!
     const firstResult = await ctx.outputs.first;
     return `${firstResult} World`;
   },
-);
+});
 
 // This work
 const runner = createRunner().register(first).register(second);
