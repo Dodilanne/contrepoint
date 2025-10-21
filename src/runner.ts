@@ -1,7 +1,7 @@
-import type { Runner, Task } from "./types";
+import type { AnyOutputs, Runner, Task } from "./types";
 
 export function createRunner<TInput = void>(): Runner<TInput> {
-  const tasks: Task<string, unknown, TInput>[] = [];
+  const tasks: Task<string, unknown, TInput, AnyOutputs>[] = [];
 
   function runTasks(input: TInput) {
     const running: Record<string, unknown> = {};
@@ -27,8 +27,10 @@ export function createRunner<TInput = void>(): Runner<TInput> {
   }
 
   return {
-    register<TName extends string, TOutput = void>(task: Task<TName, TOutput, TInput>) {
-      tasks.push(task);
+    register<TName extends string, TOutput = void, TTaskOutputs extends AnyOutputs = {}>(
+      task: Task<TName, TOutput, TInput, TTaskOutputs>,
+    ) {
+      tasks.push(task as Task<string, unknown, TInput, AnyOutputs>);
       return this;
     },
     async run(input) {

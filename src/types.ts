@@ -4,8 +4,8 @@ export type Task<TName extends string, TOutput, TInput, TOutputs extends AnyOutp
 };
 
 export type Runner<TInput, TOutputs extends AnyOutputs = {}> = {
-  register<TName extends string, TOutput>(
-    task: Task<TName, TOutput, TInput, TOutputs>,
+  register<TName extends string, TOutput, TTaskOutputs extends AnyOutputs = {}>(
+    task: TOutputs extends TTaskOutputs ? Task<TName, TOutput, TInput, TTaskOutputs> : never,
   ): Runner<TInput, Prettify<TOutputs & Record<TName, TOutput>>>;
   run: (input: TInput) => Promise<{
     [TName in keyof TOutputs]: PromiseSettledResult<TOutputs[TName]>;
