@@ -1,7 +1,7 @@
 {
   "name": "contrepoint",
   "description": "Simple utility for orchestrating interdependent concurrent tasks in TypeScript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dodilanne",
   "bugs": {
     "url": "https://github.com/dodilanne/contrepoint/issues"
